@@ -5,4 +5,5 @@ Import("env_modules")
 
 env_ground_war = env_modules.Clone()
 
+env_ground_war.add_source_files(env.modules_sources, "proc_gen/*.cpp")
 env_ground_war.add_source_files(env.modules_sources, "*.cpp")

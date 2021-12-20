@@ -7,8 +7,9 @@ class ColorSettings : public Resource {
 	GDCLASS(ColorSettings, Resource);
 
 public:
-	void setPlanetColor(const Color& p_planetColor);
+	void setPlanetColor(const Color &p_planetColor);
 	Color getPlanetColor() const;
+
 protected:
 	static void _bind_methods();
 

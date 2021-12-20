@@ -5,9 +5,15 @@
 
 class ShapeSettings : public Resource {
 	GDCLASS(ShapeSettings, Resource);
+public:
+	void setPlanetRadius(int p_radius) { planetRadius = p_radius; }
+	int getPlanetRadius() const { return planetRadius; }
 
 protected:
 	static void _bind_methods();
+
+public:
+	float planetRadius;
 };
 
 #endif

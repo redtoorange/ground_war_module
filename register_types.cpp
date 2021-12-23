@@ -1,11 +1,14 @@
 #include "register_types.h"
 
-#include "compute/ComputeTest.h"
+#include "testing/compute/ComputeTest.h"
+#include "testing/proc_gen/Planet.h"
+#include "testing/proc_gen/ColorSettings.h"
+#include "testing/proc_gen/ShapeSettings.h"
+
+#include "units/BaseUnit.h"
+
 #include "core/object/class_db.h"
 #include "editor/editor_plugin.h"
-#include "proc_gen/Planet.h"
-#include "proc_gen/ColorSettings.h"
-#include "proc_gen/ShapeSettings.h"
 
 void register_ground_war_types() {
 	GDREGISTER_CLASS(Planet);

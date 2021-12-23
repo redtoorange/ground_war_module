@@ -5,6 +5,14 @@ Import("env_modules")
 
 env_ground_war = env_modules.Clone()
 
-env_ground_war.add_source_files(env.modules_sources, "proc_gen/*.cpp")
-env_ground_war.add_source_files(env.modules_sources, "compute/*.cpp")
+# Testing
+env_ground_war.add_source_files(env.modules_sources, "testing/proc_gen/*.cpp")
+env_ground_war.add_source_files(env.modules_sources, "testing/compute/*.cpp")
+
+
+env_ground_war.add_source_files(env.modules_sources, "ui/*.cpp")
+env_ground_war.add_source_files(env.modules_sources, "navigation/*.cpp")
+env_ground_war.add_source_files(env.modules_sources, "buildings/*.cpp")
+env_ground_war.add_source_files(env.modules_sources, "units/*.cpp")
+
 env_ground_war.add_source_files(env.modules_sources, "*.cpp")

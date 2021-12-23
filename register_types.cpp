@@ -12,6 +12,7 @@ void register_ground_war_types() {
 	GDREGISTER_CLASS(ShapeSettings);
 	GDREGISTER_CLASS(ColorSettings);
 	GDREGISTER_CLASS(ComputeTest);
+	GDREGISTER_CLASS(BaseUnit);
 }
 
 void unregister_ground_war_types() {

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="16"
+   height="16"
+   viewBox="0 0 16 16"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="BaseUnit.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="52"
+     inkscape:cx="7.8557692"
+     inkscape:cy="7.5673077"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <sodipodi:guide
+       position="7.9807692,11.057692"
+       orientation="1,0"
+       id="guide1504" />
+    <sodipodi:guide
+       position="7.9807692,8.0576923"
+       orientation="0,-1"
+       id="guide1506" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <ellipse
+       style="fill:none;fill-opacity:0.996079;stroke:#bf8600;stroke-width:1.01299;stroke-opacity:1"
+       id="path846"
+       cx="8"
+       cy="8.000001"
+       rx="5.4935064"
+       ry="5.4935069" />
+    <rect
+       style="fill:none;fill-opacity:0.996079;stroke:#bf8600;stroke-width:0.969535;stroke-opacity:1"
+       id="rect1530"
+       width="7.0304627"
+       height="0.53046542"
+       x="4.4847689"
+       y="7.7347674" />
+  </g>
+</svg>

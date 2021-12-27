@@ -1,6 +1,5 @@
 ﻿#include "BaseUnit.h"
 
-#include "core/engine.h"
 #include "scene/2d/area_2d.h"
 
 BaseUnit::BaseUnit() {
@@ -8,17 +7,25 @@ BaseUnit::BaseUnit() {
 	currentSelectionState = UNSELECTED;
 
 	set_process(true);
-	set_process_unhandled_input(true);
 }
 
 void BaseUnit::_bind_methods() {
-	// Expose these methods as callable for Signals
-	ClassDB::bind_method(D_METHOD("OnMouseEntered"), &BaseUnit::OnMouseEntered);
-	ClassDB::bind_method(D_METHOD("OnMouseExited"), &BaseUnit::OnMouseExited);
+	ADD_GROUP("Paths", "path_");
+	ClassDB::bind_method(D_METHOD("SetUnitSpritePath", "sprite_path"), &BaseUnit::SetUnitSpritePath);
+	ClassDB::bind_method(D_METHOD("GetUnitSpritePath"), &BaseUnit::GetUnitSpritePath);
+	ADD_PROPERTY(PropertyInfo(Variant::NODE_PATH, "path_unit_sprite", PROPERTY_HINT_NODE_PATH_VALID_TYPES, "Sprite2D"), "SetUnitSpritePath", "GetUnitSpritePath");
 
-	// Engine Callbacks
-	ClassDB::bind_method("_unhandled_input", &BaseUnit::_unhandled_input);
-	ClassDB::bind_method("_process", &BaseUnit::_process);
+	ClassDB::bind_method(D_METHOD("SetHoveredSpritePath", "sprite_path"), &BaseUnit::SetHoveredSpritePath);
+	ClassDB::bind_method(D_METHOD("GetHoveredSpritePath"), &BaseUnit::GetHoveredSpritePath);
+	ADD_PROPERTY(PropertyInfo(Variant::NODE_PATH, "path_hovered_sprite", PROPERTY_HINT_NODE_PATH_VALID_TYPES, "Sprite2D"), "SetHoveredSpritePath", "GetHoveredSpritePath");
+
+	ClassDB::bind_method(D_METHOD("SetSelectionSpritePath", "sprite_path"), &BaseUnit::SetSelectionSpritePath);
+	ClassDB::bind_method(D_METHOD("GetSelectionSpritePath"), &BaseUnit::GetSelectionSpritePath);
+	ADD_PROPERTY(PropertyInfo(Variant::NODE_PATH, "path_selection_sprite", PROPERTY_HINT_NODE_PATH_VALID_TYPES, "Sprite2D"), "SetSelectionSpritePath", "GetSelectionSpritePath");
+
+	ClassDB::bind_method(D_METHOD("SetAreaPath", "area_path"), &BaseUnit::SetAreaPath);
+	ClassDB::bind_method(D_METHOD("GetAreaPath"), &BaseUnit::GetAreaPath);
+	ADD_PROPERTY(PropertyInfo(Variant::NODE_PATH, "path_area", PROPERTY_HINT_NODE_PATH_VALID_TYPES, "Area2D"), "SetAreaPath", "GetAreaPath");
 }
 
 void BaseUnit::_notification(int p_what) {
@@ -31,17 +38,18 @@ void BaseUnit::_notification(int p_what) {
 }
 
 void BaseUnit::_ready() {
-	unitSprite = cast_to<Sprite>(get_node_or_null(NodePath("UnitSprite")));
-	selectionSprite = cast_to<Sprite>(get_node_or_null(NodePath("SelectionSprite")));
-	hoveredSprite = cast_to<Sprite>(get_node_or_null(NodePath("HoverSprite")));
+	unitSprite = cast_to<Sprite2D>(get_node_or_null(unitSpritePath));
+	selectionSprite = cast_to<Sprite2D>(get_node_or_null(selectionSpritePath));
+	hoveredSprite = cast_to<Sprite2D>(get_node_or_null(hoveredSpritePath));
 
 	selectionSprite->set_visible(false);
 	hoveredSprite->set_visible(false);
 
 	Area2D *area = cast_to<Area2D>(get_node(NodePath("Area2D")));
 	if (area) {
-		area->connect("mouse_entered", this, "OnMouseEntered");
-		area->connect("mouse_exited", this, "OnMouseExited");
+
+		area->connect("mouse_entered", callable_mp(this, &BaseUnit::OnMouseEntered));
+		area->connect("mouse_exited", callable_mp(this, &BaseUnit::OnMouseExited));
 	}
 }
 
@@ -65,25 +73,46 @@ void BaseUnit::UpdateOverlays() {
 	}
 }
 
-void BaseUnit::_unhandled_input(Ref<InputEvent> p_event) {
-	if(currentHoverState == HOVERED || currentSelectionState == SELECTED) {
-		Ref<InputEventMouseButton> mouseButtonEvent = p_event;
-		if(mouseButtonEvent.is_valid()) {
-			if(mouseButtonEvent->get_button_index() == BUTTON_LEFT) {
-				if(currentHoverState == HOVERED && currentSelectionState == UNSELECTED) {
-					currentSelectionState = SELECTED;
-				}
-			}
-			if(mouseButtonEvent->get_button_index() == BUTTON_RIGHT) {
-				if(currentSelectionState == SELECTED) {
-					currentSelectionState = UNSELECTED;
-				}
-			}
-
-			UpdateOverlays();
-		}
-	}
+void BaseUnit::Select() {
+	currentSelectionState = SELECTED;
+	UpdateOverlays();
 }
 
-void BaseUnit::_process(float delta) {
+void BaseUnit::Deselect() {
+	currentSelectionState = UNSELECTED;
+	UpdateOverlays();
+}
+
+// --------------------------- Getters / Setters -------------------------------------------------
+
+NodePath BaseUnit::GetUnitSpritePath() const {
+	return unitSpritePath;
+}
+
+void BaseUnit::SetUnitSpritePath(const NodePath &p_unitSpritePath) {
+	unitSpritePath = p_unitSpritePath;
+}
+
+NodePath BaseUnit::GetSelectionSpritePath() const {
+	return selectionSpritePath;
+}
+
+void BaseUnit::SetSelectionSpritePath(const NodePath &p_selectionSpritePath) {
+	selectionSpritePath = p_selectionSpritePath;
+}
+
+NodePath BaseUnit::GetHoveredSpritePath() const {
+	return hoveredSpritePath;
+}
+
+void BaseUnit::SetHoveredSpritePath(const NodePath &p_hoveredSpritePath) {
+	hoveredSpritePath = p_hoveredSpritePath;
+}
+
+NodePath BaseUnit::GetAreaPath() const {
+	return areaPath;
+}
+
+void BaseUnit::SetAreaPath(const NodePath &p_areaPath) {
+	areaPath = p_areaPath;
 }

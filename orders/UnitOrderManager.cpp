@@ -5,39 +5,47 @@ UnitOrderManager::UnitOrderManager() {
 }
 
 void UnitOrderManager::_bind_methods() {
-	ClassDB::bind_method(D_METHOD("SetUnitSelectionManagerPath", "unit_selection_manager_path"), &UnitOrderManager::SetUnitSelectionManagerPath);
-	ClassDB::bind_method(D_METHOD("GetUnitSelectionManagerPath"), &UnitOrderManager::GetUnitSelectionManagerPath);
-	ADD_PROPERTY(PropertyInfo(Variant::NODE_PATH, "Unit Selection Manager", PROPERTY_HINT_NODE_PATH_VALID_TYPES, "UnitSelectionManager"), "SetUnitSelectionManagerPath", "GetUnitSelectionManagerPath");
+	ClassDB::bind_method(D_METHOD("AddOrder", "order"), &UnitOrderManager::AddOrder);
+	ClassDB::bind_method(D_METHOD("ClearOrders"), &UnitOrderManager::ClearOrders);
+	ClassDB::bind_method(D_METHOD("CancelOrder"), &UnitOrderManager::CancelOrder);
 }
 
 void UnitOrderManager::_notification(int p_what) {
 	if (Engine::get_singleton()->is_editor_hint())
 		return;
 
-	if (p_what == NOTIFICATION_READY) {
-		_ready();
-	} else if (p_what == NOTIFICATION_PROCESS) {
+	if (p_what == NOTIFICATION_PROCESS) {
 		_process(get_process_delta_time());
 	}
 }
 
-void UnitOrderManager::CommitOrder(Order *order) {
+void UnitOrderManager::AddOrder(Ref<Order> order) {
 	orderQueue.push(order);
 }
 
-void UnitOrderManager::_ready() {
-	unitSelectionManager = cast_to<UnitSelectionManager>(get_node(unitSelectionManagerPath));
-}
-
 void UnitOrderManager::_process(float delta) {
+	ProcessOrders();
 }
 
-// --------------------------- Getters / Setters -------------------------------------------------
+void UnitOrderManager::ProcessOrders() {
+	if (!orderQueue.empty()) {
+		Ref<Order> order = orderQueue.front();
 
-NodePath UnitOrderManager::GetUnitSelectionManagerPath() const {
-	return unitSelectionManagerPath;
+		if (order.is_valid()) {
+			order->Execute();
+			if (order->IsComplete()) {
+				orderQueue.pop();
+			}
+		}
+	}
 }
 
-void UnitOrderManager::SetUnitSelectionManagerPath(const NodePath &p_unitSelectionManagerPath) {
-	unitSelectionManagerPath = p_unitSelectionManagerPath;
+void UnitOrderManager::ClearOrders() {
+	while (!orderQueue.empty()) {
+		orderQueue.pop();
+	}
+}
+
+void UnitOrderManager::CancelOrder() {
+	orderQueue.pop();
 }

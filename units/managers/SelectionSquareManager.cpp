@@ -8,18 +8,14 @@ SelectionSquareManager::SelectionSquareManager() {
 void SelectionSquareManager::_ready() {
 	selectionSquare = cast_to<NinePatchRect>(get_node(selectionSquarePath));
 	selectionSquare->set_visible(false);
-
-	unitManager = cast_to<UnitSelectionManager>(get_node(unitManagerPath));
 }
 
 void SelectionSquareManager::_bind_methods() {
-	ClassDB::bind_method(D_METHOD("SetUnitSelectionManagerPath", "unit_manager_path"), &SelectionSquareManager::SetUnitSelectionManagerPath);
-	ClassDB::bind_method(D_METHOD("GetUnitSelectionManagerPath"), &SelectionSquareManager::GetUnitSelectionManagerPath);
-	ADD_PROPERTY(PropertyInfo(Variant::NODE_PATH, "unit_manager_path", PROPERTY_HINT_NODE_PATH_VALID_TYPES, "UnitSelectionManager"), "SetUnitSelectionManagerPath", "GetUnitSelectionManagerPath");
-
 	ClassDB::bind_method(D_METHOD("SetSelectionSquarePath", "selection_square_path"), &SelectionSquareManager::SetSelectionSquarePath);
 	ClassDB::bind_method(D_METHOD("GetSelectionSquarePath"), &SelectionSquareManager::GetSelectionSquarePath);
 	ADD_PROPERTY(PropertyInfo(Variant::NODE_PATH, "selection_square_path", PROPERTY_HINT_NODE_PATH_VALID_TYPES, "NinePatchRect"), "SetSelectionSquarePath", "GetSelectionSquarePath");
+
+	ADD_SIGNAL(MethodInfo("selection_completed", PropertyInfo(Variant::RECT2, "selection_area")));
 }
 
 void SelectionSquareManager::_notification(int p_what) {
@@ -66,7 +62,7 @@ void SelectionSquareManager::HandleLeftMouseEvent(const Ref<InputEventMouseButto
 	} else {
 		selectionSquare->set_visible(false);
 		selecting = false;
-		unitManager->SelectUnits(Rect2(rect_position, rect_size));
+		emit_signal("selection_completed", Rect2(rect_position, rect_size));
 	}
 }
 
@@ -104,12 +100,4 @@ NodePath SelectionSquareManager::GetSelectionSquarePath() const {
 
 void SelectionSquareManager::SetSelectionSquarePath(const NodePath &p_selectionSquarePath) {
 	selectionSquarePath = p_selectionSquarePath;
-}
-
-NodePath SelectionSquareManager::GetUnitSelectionManagerPath() const {
-	return unitManagerPath;
-}
-
-void SelectionSquareManager::SetUnitSelectionManagerPath(const NodePath &p_unitManagerPath) {
-	unitManagerPath = p_unitManagerPath;
 }

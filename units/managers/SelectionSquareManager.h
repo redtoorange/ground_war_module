@@ -1,7 +1,6 @@
 ﻿#ifndef SELECTION_CONTROLLER_H
 #define SELECTION_CONTROLLER_H
 
-#include "UnitSelectionManager.h"
 #include "scene/2d/node_2d.h"
 #include "scene/gui/nine_patch_rect.h"
 
@@ -12,10 +11,9 @@ public:
 	SelectionSquareManager();
 
 	NodePath GetSelectionSquarePath() const;
+
 	void SetSelectionSquarePath(const NodePath &p_selectionSquarePath);
 
-	NodePath GetUnitSelectionManagerPath() const;
-	void SetUnitSelectionManagerPath(const NodePath &p_unitManagerPath);
 protected:
 	static void _bind_methods();
 	void _notification(int p_what);
@@ -27,8 +25,6 @@ private:
 	NodePath selectionSquarePath;
 	NinePatchRect *selectionSquare;
 
-	NodePath unitManagerPath;
-	UnitSelectionManager *unitManager;
 
 	// selection properties
 	bool selecting;

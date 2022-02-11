@@ -1,5 +1,4 @@
-#ifndef PRIORITY_QUEUE_H
-#define PRIORITY_QUEUE_H
+#pragma once
 
 #include <queue>
 #include <utility>
@@ -37,5 +36,3 @@ struct PriorityQueue {
 		return bestItem;
 	}
 };
-
-#endif

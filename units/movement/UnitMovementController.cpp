@@ -1,4 +1,5 @@
 ﻿#include "UnitMovementController.h"
+#include "modules/ground_war/units/managers/UnitSelectionManager.h"
 
 void UnitMovementController::_bind_methods() {
 	ADD_GROUP("Paths", "path_");

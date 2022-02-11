@@ -1,8 +1,8 @@
-﻿#ifndef SELECTION_CONTROLLER_H
-#define SELECTION_CONTROLLER_H
+﻿#pragma once
 
 #include "scene/2d/node_2d.h"
-#include "scene/gui/nine_patch_rect.h"
+
+class NinePatchRect;
 
 class SelectionSquareManager : public Node2D {
 	GDCLASS(SelectionSquareManager, Node2D);
@@ -38,4 +38,3 @@ private:
 	void UpdateRectExtents();
 };
 
-#endif

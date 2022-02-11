@@ -1,5 +1,4 @@
-﻿#ifndef BASE_BUILDING_H
-#define BASE_BUILDING_H
+﻿#pragma once
 
 #include "scene/2d/node_2d.h"
 
@@ -10,6 +9,4 @@ protected:
 	static void _bind_methods();
 	void _notification(int p_what);
 };
-
-#endif
 

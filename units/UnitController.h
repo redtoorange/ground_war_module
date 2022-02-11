@@ -1,7 +1,8 @@
-﻿#ifndef UNIT_CONTROLLER_H
-#define UNIT_CONTROLLER_H
-#include "BaseUnit.h"
+﻿#pragma once
+
 #include "scene/2d/node_2d.h"
+#include "BaseUnit.h"
+
 
 class UnitController : public Node2D {
 	GDCLASS(UnitController, Node2D);
@@ -23,5 +24,3 @@ protected:
 private:
 	Vector<BaseUnit *> allUnits;
 };
-
-#endif

@@ -1,7 +1,8 @@
-﻿#ifndef UNIT_MOVEMENT_CONTROLLER_H
-#define UNIT_MOVEMENT_CONTROLLER_H
-#include "modules/ground_war/units/managers/UnitSelectionManager.h"
+﻿#pragma once
+
 #include "scene/3d/node_3d.h"
+
+class UnitSelectionManager;
 
 class UnitMovementController : public Node3D {
 	GDCLASS(UnitMovementController, Node3D);
@@ -22,4 +23,3 @@ private:
 	UnitSelectionManager *unitSelectionManager;
 };
 
-#endif

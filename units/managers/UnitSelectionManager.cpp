@@ -1,4 +1,5 @@
 ﻿#include "UnitSelectionManager.h"
+#include "SelectionSquareManager.h"
 
 void UnitSelectionManager::_ready() {
 	unitController = cast_to<UnitController>(get_node(unitControllerPath));

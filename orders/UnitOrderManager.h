@@ -1,5 +1,4 @@
-﻿#ifndef ORDER_MANAGER_H
-#define ORDER_MANAGER_H
+﻿#pragma once
 
 #include "Order.h"
 #include "scene/2d/node_2d.h"
@@ -31,4 +30,3 @@ private:
 	std::queue<Ref<Order>> orderQueue;
 };
 
-#endif

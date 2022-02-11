@@ -17,9 +17,10 @@ void register_ground_war_types() {
 	GDREGISTER_CLASS(BaseBuilding);
 
 
-	GDREGISTER_CLASS(UnitController);
 	GDREGISTER_CLASS(UnitSelectionManager);
 	GDREGISTER_CLASS(SelectionSquareManager);
+	GDREGISTER_CLASS(UnitController);
+
 	GDREGISTER_CLASS(RtsCameraController);
 	GDREGISTER_CLASS(UnitOrderManager);
 

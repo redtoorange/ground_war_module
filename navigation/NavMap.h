@@ -1,5 +1,4 @@
-#ifndef NAV_MAP_H
-#define NAV_MAP_H
+#pragma once
 
 #include "NavMapCell.h"
 #include <vector>
@@ -22,5 +21,3 @@ private:
 
 	Graph mapCells;
 };
-
-#endif

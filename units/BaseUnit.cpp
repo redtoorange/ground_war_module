@@ -1,5 +1,6 @@
 ﻿#include "BaseUnit.h"
 
+#include "scene/2d/sprite_2d.h"
 #include "scene/2d/area_2d.h"
 
 BaseUnit::BaseUnit() {

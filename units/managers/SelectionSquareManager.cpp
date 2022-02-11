@@ -1,4 +1,5 @@
 ﻿#include "SelectionSquareManager.h"
+#include "scene/gui/nine_patch_rect.h"
 
 SelectionSquareManager::SelectionSquareManager() {
 	set_process(true);

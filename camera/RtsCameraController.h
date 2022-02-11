@@ -1,5 +1,4 @@
-﻿#ifndef CAMERA_CONTROLLER_H
-#define CAMERA_CONTROLLER_H
+﻿#pragma once
 
 #include "scene/2d/node_2d.h"
 
@@ -11,53 +10,23 @@ class RtsCameraController : public Node2D {
 public:
 	RtsCameraController();
 
-	float GetCameraSpeed() const {
-		return cameraSpeed;
-	}
+	float get_camera_speed() const;
+	void set_camera_speed(float p_cameraSpeed);
 
-	void SetCameraSpeed(float p_cameraSpeed) {
-		cameraSpeed = p_cameraSpeed;
-	}
+	float get_camera_fast_multiplier() const;
+	void set_camera_fast_multiplier(float p_cameraFastMultiplier);
 
-	float GetCameraFastMultiplier() const {
-		return cameraFastMultiplier;
-	}
+	float get_min_zoom() const;
+	void set_min_zoom(float p_minZoom);
 
-	void SetCameraFastMultiplier(float p_cameraFastMultiplier) {
-		cameraFastMultiplier = p_cameraFastMultiplier;
-	}
+	float get_max_zoom() const;
+	void set_max_zoom(float p_maxZoom);
 
-	float GetMinZoom() const {
-		return minZoom;
-	}
+	float get_zoom_speed() const;
+	void set_zoom_speed(float p_zoomSpeed);
 
-	void SetMinZoom(float p_minZoom) {
-		minZoom = p_minZoom;
-	}
-
-	float GetMaxZoom() const {
-		return maxZoom;
-	}
-
-	void SetMaxZoom(float p_maxZoom) {
-		maxZoom = p_maxZoom;
-	}
-
-	float GetZoomSpeed() const {
-		return zoomSpeed;
-	}
-
-	void SetZoomSpeed(float p_zoomSpeed) {
-		zoomSpeed = p_zoomSpeed;
-	}
-
-	float GetZoomLevel() const {
-		return zoomLevel;
-	}
-
-	void SetZoomLevel(float p_zoomLevel) {
-		zoomLevel = p_zoomLevel;
-	}
+	float get_zoom_level() const;
+	void set_zoom_level(float p_zoomLevel);
 
 protected:
 	static void _bind_methods();
@@ -82,5 +51,3 @@ private:
 	void HandleMovement(float delta);
 	void HandleZoom(float delta);
 };
-
-#endif

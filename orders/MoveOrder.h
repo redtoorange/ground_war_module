@@ -1,10 +1,9 @@
-﻿#ifndef MOVE_ORDER_H
-#define MOVE_ORDER_H
+﻿#pragma once
 
 #include "Order.h"
 #include "core/math/vector2.h"
-#include "modules/ground_war/units/BaseUnit.h"
 
+class BaseUnit;
 
 class MoveOrder : public Order {
 	GDCLASS(MoveOrder, Order);
@@ -30,5 +29,3 @@ private:
 	Vector2 origin;
 	Vector2 destination;
 };
-
-#endif

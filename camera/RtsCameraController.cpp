@@ -3,7 +3,7 @@
 #include "scene/2d/camera_2d.h"
 
 RtsCameraController::RtsCameraController() {
-	cameraSpeed = 5.0f;
+	cameraSpeed = 100.0f;
 	cameraFastMultiplier = 2.0f;
 	minZoom = 0.5f;
 	maxZoom = 10.0f;
@@ -13,22 +13,21 @@ RtsCameraController::RtsCameraController() {
 }
 
 void RtsCameraController::_bind_methods() {
-	ClassDB::bind_method(D_METHOD("SetCameraSpeed", "camera_speed"), &RtsCameraController::SetCameraSpeed);
-	ClassDB::bind_method(D_METHOD("GetCameraSpeed"), &RtsCameraController::GetCameraSpeed);
-	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "camera_speed"), "SetCameraSpeed", "GetCameraSpeed");
+	ClassDB::bind_method(D_METHOD("set_camera_speed", "camera_speed"), &RtsCameraController::set_camera_speed);
+	ClassDB::bind_method(D_METHOD("get_camera_speed"), &RtsCameraController::get_camera_speed);
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "camera_speed"), "set_camera_speed", "get_camera_speed");
 
-	ClassDB::bind_method(D_METHOD("SetCameraFastMultiplier", "camera_fast_multiplier"), &RtsCameraController::SetCameraFastMultiplier);
-	ClassDB::bind_method(D_METHOD("GetCameraFastMultiplier"), &RtsCameraController::GetCameraFastMultiplier);
-	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "camera_fast_multiplier"), "SetCameraFastMultiplier", "GetCameraFastMultiplier");
+	ClassDB::bind_method(D_METHOD("set_camera_fast_multiplier", "camera_fast_multiplier"), &RtsCameraController::set_camera_fast_multiplier);
+	ClassDB::bind_method(D_METHOD("get_camera_fast_multiplier"), &RtsCameraController::get_camera_fast_multiplier);
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "camera_fast_multiplier"), "set_camera_fast_multiplier", "get_camera_fast_multiplier");
 
+	ClassDB::bind_method(D_METHOD("set_min_zoom", "camera_min_zoom"), &RtsCameraController::set_min_zoom);
+	ClassDB::bind_method(D_METHOD("get_min_zoom"), &RtsCameraController::get_min_zoom);
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "camera_min_zoom"), "set_min_zoom", "get_min_zoom");
 
-	ClassDB::bind_method(D_METHOD("SetMinZoom", "camera_min_zoom"), &RtsCameraController::SetMinZoom);
-	ClassDB::bind_method(D_METHOD("GetMinZoom"), &RtsCameraController::GetMinZoom);
-	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "camera_min_zoom"), "SetMinZoom", "GetMinZoom");
-
-	ClassDB::bind_method(D_METHOD("SetMaxZoom", "camera_max_zoom"), &RtsCameraController::SetMaxZoom);
-	ClassDB::bind_method(D_METHOD("GetMaxZoom"), &RtsCameraController::GetMaxZoom);
-	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "camera_max_zoom"), "SetMaxZoom", "GetMaxZoom");
+	ClassDB::bind_method(D_METHOD("set_max_zoom", "camera_max_zoom"), &RtsCameraController::set_max_zoom);
+	ClassDB::bind_method(D_METHOD("get_max_zoom"), &RtsCameraController::get_max_zoom);
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "camera_max_zoom"), "set_max_zoom", "get_max_zoom");
 }
 
 void RtsCameraController::_notification(int p_what) {
@@ -42,7 +41,6 @@ void RtsCameraController::_notification(int p_what) {
 }
 
 void RtsCameraController::_ready() {
-	print_line("Prepping RtsCameraController");
 	camera2D = cast_to<Camera2D>(get_node(NodePath("Camera2D")));
 	zoomLevel = camera2D->get_zoom().x;
 }
@@ -101,4 +99,53 @@ void RtsCameraController::HandleZoom(float delta) {
 
 		camera2D->set_zoom(Vector2(zoomLevel, zoomLevel));
 	}
+}
+
+
+float RtsCameraController::get_camera_speed() const {
+	return cameraSpeed;
+}
+
+void RtsCameraController::set_camera_speed(float p_cameraSpeed) {
+	cameraSpeed = p_cameraSpeed;
+}
+
+float RtsCameraController::get_camera_fast_multiplier() const {
+	return cameraFastMultiplier;
+}
+
+void RtsCameraController::set_camera_fast_multiplier(float p_cameraFastMultiplier) {
+	cameraFastMultiplier = p_cameraFastMultiplier;
+}
+
+float RtsCameraController::get_min_zoom() const {
+	return minZoom;
+}
+
+void RtsCameraController::set_min_zoom(float p_minZoom) {
+	minZoom = p_minZoom;
+}
+
+float RtsCameraController::get_max_zoom() const {
+	return maxZoom;
+}
+
+void RtsCameraController::set_max_zoom(float p_maxZoom) {
+	maxZoom = p_maxZoom;
+}
+
+float RtsCameraController::get_zoom_speed() const {
+	return zoomSpeed;
+}
+
+void RtsCameraController::set_zoom_speed(float p_zoomSpeed) {
+	zoomSpeed = p_zoomSpeed;
+}
+
+float RtsCameraController::get_zoom_level() const {
+	return zoomLevel;
+}
+
+void RtsCameraController::set_zoom_level(float p_zoomLevel) {
+	zoomLevel = p_zoomLevel;
 }

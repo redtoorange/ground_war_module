@@ -1,10 +1,12 @@
-﻿#ifndef UNIT_MANAGER_H
-#define UNIT_MANAGER_H
+﻿#pragma once
 
-#include "SelectionSquareManager.h"
+
+#include "scene/2d/node_2d.h"
 #include "modules/ground_war/units/BaseUnit.h"
 #include "modules/ground_war/units/UnitController.h"
-#include "scene/2d/node_2d.h"
+
+class SelectionSquareManager;
+
 
 class UnitSelectionManager : public Node2D {
 	GDCLASS(UnitSelectionManager, Node2D);
@@ -39,4 +41,3 @@ private:
 	Vector<BaseUnit *> selectedUnits;
 };
 
-#endif

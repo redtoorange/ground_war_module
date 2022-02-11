@@ -1,9 +1,8 @@
-﻿#ifndef BASE_UNIT_H
-#define BASE_UNIT_H
+﻿#pragma once
 
 #include "scene/2d/node_2d.h"
-#include "scene/2d/sprite_2d.h"
 
+class Sprite2D;
 class BaseUnit : public Node2D {
 	GDCLASS(BaseUnit, Node2D);
 public:
@@ -60,4 +59,3 @@ private:
 	SelectionState currentSelectionState;
 };
 
-#endif

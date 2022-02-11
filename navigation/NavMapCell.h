@@ -1,5 +1,4 @@
-#ifndef NAV_MAP_CELL_H
-#define NAV_MAP_CELL_H
+#pragma once
 
 #include <cstdint>
 
@@ -13,4 +12,3 @@ struct NavMapCell {
 	int32_t graph_y;
 };
 
-#endif
